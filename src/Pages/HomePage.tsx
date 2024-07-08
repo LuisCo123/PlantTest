@@ -1,5 +1,6 @@
 import { PageModel } from '../Components/PageModel'
 import UfbaLogo from '../assets/UfbaLogo.png'
+import { Link } from 'react-router-dom'
 export const HomePage = () => {
 
     return (
@@ -11,10 +12,11 @@ export const HomePage = () => {
                     <div className='h-full bg-[#D9D9D9] w-1/4 items-center mr-5 rounded-3xl'>
                         <ul className="menu menu-vertical p-5">
                             <li>
-                                <button className="text-black md:text-xl my-1 btn btn-ghost h-full w-full mt-20 p-3" onClick={() => alert("click")}>
+                                <Link  to={"/CreateTest"} className="text-black md:text-xl my-1 btn btn-ghost h-full w-full mt-20 p-3">
                                     Criar Teste
                                     <div className="divider divider-neutral w-[80%] mx-auto" />
-                                </button>
+                                    
+                                </Link>
                             </li>
 
                             <li>
