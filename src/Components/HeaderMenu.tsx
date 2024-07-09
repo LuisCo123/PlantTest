@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom"
+
 export const HeaderMenu = () => {
     return (
         <div className="bg-[#D9D9D9] flex-none">
             <div className="flex justify-between">
                 <div className="flex items-center">
-                    <button className="text-black md:text-xl my-1 btn btn-ghost w-full">Teste Sobre a  Planta de Incrustação Carbonatica</button>
+                    <Link to={"/"} className="text-black md:text-xl my-1 btn btn-ghost w-full">Teste Incrustação Carbonatica</Link>
                 </div>
                 <div>
                     <ul className="menu menu-horizontal justify-center sm:justify-end px-1">
