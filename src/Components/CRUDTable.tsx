@@ -2,7 +2,7 @@ import { BiSearch } from "react-icons/bi";
 import { TbTrashFilled } from "react-icons/tb";
 import { BiPencil } from "react-icons/bi";
 import { useEffect, useState } from "react";
-export const CRUDTable = ({ data, deleteFunction, editFunction }: { data: object[], deleteFunction: (element: any) => void, editFunction: (element: any) => void }) => {
+export const CRUDTable = ({ data, deleteFunction, editFunction, idColumnName }: { data: object[], deleteFunction: (element: any) => void, editFunction: (element: any) => void, idColumnName:string }) => {
     const headers: Array<string> = data[0] ? Object.keys(data[0]) : [''];
     const [filteredData, setFilteredData] = useState(data);
     const [showingData, setShowingData] = useState(filteredData);
@@ -77,7 +77,7 @@ export const CRUDTable = ({ data, deleteFunction, editFunction }: { data: object
                     <tbody>
                         {showingData.map((row, index) => {
                             return (
-                                <tr key={index} id={row[headers[0] as keyof object]} className=" hover:bg-gray-700 hover:text-black">
+                                <tr key={index} id={row[idColumnName as keyof object]} className=" hover:bg-gray-700 hover:text-black">
                                     {headers.map((item, index) => {
                                         return (
                                             <td key={index}>

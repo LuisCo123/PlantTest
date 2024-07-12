@@ -9,10 +9,10 @@ export const HomePage = () => {
             {/* modelo de página */}
             <PageModel>
                 {/* Menu Horizontal */}
-                <div className=' flex flex-row h-full'>
+                <div className=' flex flex-col h-full lg:flex-row md:justify-center'>
                    <LateralMenu/>
                     {/* Read Me lateral para informações necessárias */}
-                    <div className='h-full bg-[#D9D9D9] w-5/6 rounded-3xl p-20 relative'>
+                    <div className='h-full bg-[#D9D9D9] w-full lg:w-5/6 rounded-3xl p-20 relative'>
                         <div className='mb-14'>
                             <p className='text-black text-6xl mb-2'>Sobre:</p>
                             <div className='flex justify-end'>
