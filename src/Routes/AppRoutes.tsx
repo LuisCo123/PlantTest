@@ -7,7 +7,7 @@ import { MetodoPrecipitacao } from "../Pages/Parametrizacao/MetodoPrecipitacao";
 import { Reagente } from "../Pages/Parametrizacao/Reagente";
 import { SolucaoIncrustante } from "../Pages/Parametrizacao/SolucaoIncrustante";
 import { FerramentaUS } from "../Pages/Parametrizacao/FerramentaUS";
-import { SolucaoReagente } from "../Pages/Parametrizacao/SolucaoReagente";
+// import { SolucaoReagente } from "../Pages/Parametrizacao/SolucaoReagente";
 import { AnaliseMev } from "../Pages/Parametrizacao/AnaliseMev";
 export const AppRoutes = () => {
     return (
