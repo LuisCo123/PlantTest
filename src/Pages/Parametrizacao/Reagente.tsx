@@ -5,7 +5,7 @@ import { CRUDTable } from "../../Components/CRUDTable";
 import { LateralMenu } from "../../Components/LateralMenu";
 import { baseURL } from "../../config/AxiosConfig";
 
-type formReagenteData = {
+export type formReagenteData = {
     id_reagente: number,
     nome: string,
     concentracao: string,
