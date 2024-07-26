@@ -2,7 +2,7 @@ import { BiSearch } from "react-icons/bi";
 import { TbTrashFilled } from "react-icons/tb";
 import { BiPencil } from "react-icons/bi";
 import { useEffect, useState } from "react";
-export const CRUDTable = ({ data, deleteFunction, editFunction, idColumnName }: { data: object[], deleteFunction: (element: any) => void, editFunction: (element: any) => void, idColumnName:string }) => {
+export const CRUDTable = ({ testePage, data, deleteFunction, editFunction, idColumnName }: { testePage?: boolean, data: object[], deleteFunction: (element: any) => void, editFunction: (element: any) => void, idColumnName: string }) => {
     const headers: Array<string> = data[0] ? Object.keys(data[0]) : [''];
     const [filteredData, setFilteredData] = useState(data);
     const [showingData, setShowingData] = useState(filteredData);
@@ -27,14 +27,14 @@ export const CRUDTable = ({ data, deleteFunction, editFunction, idColumnName }: 
         setActualPages(0);
         setFilteredData(newValue);
     }
-    const nextPage = ()=>{
-        if(actualPage < qtdPages){
-            setActualPages(actualPage+1);
+    const nextPage = () => {
+        if (actualPage < qtdPages) {
+            setActualPages(actualPage + 1);
         }
     }
-    const previewsPage = ()=>{
-        if(actualPage > 0){
-            setActualPages(actualPage-1);
+    const previewsPage = () => {
+        if (actualPage > 0) {
+            setActualPages(actualPage - 1);
         }
     }
     useEffect(() => {
@@ -44,13 +44,13 @@ export const CRUDTable = ({ data, deleteFunction, editFunction, idColumnName }: 
     }, [data])
     useEffect(() => {
         if (data.length > 0) {
-            setQtdPages(Math.floor(filteredData.length/10));
+            setQtdPages(Math.floor(filteredData.length / 10));
             setShowingData(filteredData.slice(actualPage * 10, actualPage * 10 + 10));
         }
     }, [filteredData])
-    useEffect(()=>{
+    useEffect(() => {
         setShowingData(filteredData.slice(actualPage * 10, actualPage * 10 + 10));
-    },[actualPage])
+    }, [actualPage])
 
     return (
         <div className="mt-10 overflow-x-auto">
@@ -65,19 +65,35 @@ export const CRUDTable = ({ data, deleteFunction, editFunction, idColumnName }: 
                     {/* head */}
                     <thead>
                         <tr>
+                            {testePage ?
+                                <>
+                                    <th className="text-lg font-bold">Excluir</th>
+                                    <th className="text-lg font-bold">Editar</th>
+                                </>:null
+                            }
                             {headers?.map((item: any, index: any) => {
                                 return (
                                     <th key={index} className="text-lg font-bold text-gray-400">{item}</th>
                                 )
                             })}
-                            <th className="text-lg font-bold">Excluir</th>
-                            <th className="text-lg font-bold">Editar</th>
+                            {!testePage ?
+                                <>
+                                    <th className="text-lg font-bold">Excluir</th>
+                                    <th className="text-lg font-bold">Editar</th>
+                                </>:null
+                            }
                         </tr>
                     </thead>
                     <tbody>
                         {showingData.map((row, index) => {
                             return (
                                 <tr key={index} id={row[idColumnName as keyof object]} className=" hover:bg-gray-700 hover:text-black">
+                                    {testePage ?
+                                        <>
+                                            <td><button className="btn btn-outline btn-sm" onClick={(element: any) => deleteFunction(element.target.parentNode.closest('tr').id)}><TbTrashFilled size={12} color="#ff5555" /></button></td>
+                                            <td><button className="btn btn-outline btn-sm" onClick={(element: any) => editFunction(element.target.parentNode.closest('tr').id)}><BiPencil size={12} color="#ffff00" /></button></td>
+                                        </>:null
+                                    }
                                     {headers.map((item, index) => {
                                         return (
                                             <td key={index}>
@@ -85,8 +101,12 @@ export const CRUDTable = ({ data, deleteFunction, editFunction, idColumnName }: 
                                             </td>
                                         )
                                     })}
-                                    <td><button className="btn btn-outline btn-sm" onClick={(element: any) => deleteFunction(element.target.parentNode.closest('tr').id)}><TbTrashFilled size={12} color="#ff5555" /></button></td>
-                                    <td><button  className="btn btn-outline btn-sm" onClick={(element: any) => editFunction(element.target.parentNode.closest('tr').id)}><BiPencil size={12} color="#ffff00" /></button></td>
+                                    {!testePage ?
+                                        <>
+                                            <td><button className="btn btn-outline btn-sm" onClick={(element: any) => deleteFunction(element.target.parentNode.closest('tr').id)}><TbTrashFilled size={12} color="#ff5555" /></button></td>
+                                            <td><button className="btn btn-outline btn-sm" onClick={(element: any) => editFunction(element.target.parentNode.closest('tr').id)}><BiPencil size={12} color="#ffff00" /></button></td>
+                                        </>:null
+                                    }
                                 </tr>);
                         })}
                     </tbody>
@@ -94,9 +114,9 @@ export const CRUDTable = ({ data, deleteFunction, editFunction, idColumnName }: 
                 : null
             }
             <div className="flex justify-end ">
-                <button onClick={previewsPage}className=" btn btn-ghost bg-gray-600 rounded-none rounded-bl-xl">«</button>
+                <button onClick={previewsPage} className=" btn btn-ghost bg-gray-600 rounded-none rounded-bl-xl">«</button>
                 <button className=" btn btn-ghost bg-gray-600 rounded-none">{actualPage}</button>
-                <button onClick={nextPage}className=" btn btn-ghost bg-gray-600 rounded-none rounded-br-xl">»</button>
+                <button onClick={nextPage} className=" btn btn-ghost bg-gray-600 rounded-none rounded-br-xl">»</button>
             </div>
         </div>
     )
